@@ -61,7 +61,7 @@ func directoryParser(fs afero.Fs, regex string, repoPath string) []string {
 			cleanFile := strings.Replace(file, repoPath, "", 1)
 			cleanDiscovery = append(cleanDiscovery, cleanFile)
 		} else if strings.HasPrefix(file, ".github") {
-			cleanDiscovery = append(cleanDiscovery, "/" + file)
+			cleanDiscovery = append(cleanDiscovery, "/"+file)
 		} else {
 			cleanDiscovery = append(cleanDiscovery, file)
 		}
@@ -86,16 +86,16 @@ func directoryParser(fs afero.Fs, regex string, repoPath string) []string {
 }
 
 func removeDuplicates(stringSlice []string) []string {
-    keys := make(map[string]bool)
-    list := []string{}
+	keys := make(map[string]bool)
+	list := []string{}
 
-    for _, entry := range stringSlice {
-        if _, value := keys[entry]; !value {
-            keys[entry] = true
-            list = append(list, entry)
-        }
-    }
-    return list
+	for _, entry := range stringSlice {
+		if _, value := keys[entry]; !value {
+			keys[entry] = true
+			list = append(list, entry)
+		}
+	}
+	return list
 }
 
 func updatesBuilder(directories []string, ecosystem string) []Update {
@@ -103,8 +103,8 @@ func updatesBuilder(directories []string, ecosystem string) []Update {
 	for _, dir := range directories {
 		update := Update{
 			PackageEcosystem: ecosystem,
-			Directory: dir,
-			Schedule: struct{
+			Directory:        dir,
+			Schedule: struct {
 				Interval string `yaml:"interval"`
 			}{
 				Interval: "daily",
@@ -115,7 +115,7 @@ func updatesBuilder(directories []string, ecosystem string) []Update {
 	return updates
 }
 
-func joinUpdates (updates ...[]Update) []Update {
+func joinUpdates(updates ...[]Update) []Update {
 	var joinedUpdate []Update
 	for _, update := range updates {
 		joinedUpdate = append(joinedUpdate, update...)
@@ -123,7 +123,7 @@ func joinUpdates (updates ...[]Update) []Update {
 	return joinedUpdate
 }
 
-func outputConfig (config Configuration) {
+func outputConfig(config Configuration) {
 	yamlOutput, err := yaml.Marshal(config)
 	if err != nil {
 		fmt.Println(err)

@@ -20,7 +20,7 @@ var (
 		Version: version,
 		Run: func(cmd *cobra.Command, args []string) {
 			if len(args) == 0 {
-				color.Style{color.FgRed, color.OpBold}.Println("Please provide the path to the repo.")
+				color.Style{color.FgRed, color.OpBold}.Println("Please provide the path to the repository.")
 				fmt.Println()
 				cmd.Usage()
 			} else if len(args) > 1 {

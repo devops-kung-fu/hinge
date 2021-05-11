@@ -73,7 +73,6 @@ func directoryParser(fs afero.Fs, regex string, repoPath string) []string {
 	}
 	var directory []string
 	for _, dots := range dotDirectory {
-		fmt.Println(len(dots))
 		if len(dots) == 1 {
 			slashes := strings.Replace(dots, ".", "/", 1)
 			directory = append(directory, slashes)
@@ -81,7 +80,6 @@ func directoryParser(fs afero.Fs, regex string, repoPath string) []string {
 			directory = append(directory, dots)
 		}
 	}
-	fmt.Println(directory)
 	return directory
 }
 

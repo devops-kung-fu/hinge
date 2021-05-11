@@ -26,3 +26,60 @@ sudo mv hinge-1.0.0-linux-amd64 /usr/local/bin/hinge
 ```
 
 ## How To Hinge :dancer:
+
+### hinge
+
+Running `hinge` with no arguments will produce the following output.
+
+```bash
+$ hinge
+Hinge
+https://github.com/devops-kung-fu/hinge
+Version: 1.0.0
+
+Please provide the path to the repository.
+
+Usage:
+  hinge [flags] path/to/repo
+
+Examples:
+  hinge path/to/repo
+
+Flags:
+  -h, --help      help for hinge
+  -v, --version   version for hinge
+```
+
+###
+
+### hinge -h|--help
+
+```bash
+$ hinge -h
+Hinge
+https://github.com/devops-kung-fu/hinge
+Version: 1.0.0
+
+Creates and updates your Dependabot config.
+
+Usage:
+  hinge [flags] path/to/repo
+
+Examples:
+  hinge path/to/repo
+
+Flags:
+  -h, --help      help for hinge
+  -v, --version   version for hinge
+```
+
+### hinge -v|--version
+
+```bash
+$ hinge -v
+Hinge
+https://github.com/devops-kung-fu/hinge
+Version: 1.0.0
+
+hinge version 1.0.0
+```

@@ -131,6 +131,9 @@ func joinUpdates(updates ...[]Update) []Update {
 	for _, update := range updates {
 		joinedUpdate = append(joinedUpdate, update...)
 	}
+	if len(joinedUpdate) > 200 {
+		joinedUpdate = joinedUpdate[:200]
+	}
 	return joinedUpdate
 }
 

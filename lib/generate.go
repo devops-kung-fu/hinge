@@ -6,13 +6,16 @@ import (
 	"path"
 	"strings"
 
+	"github.com/devops-kung-fu/heybo"
 	"github.com/spf13/afero"
 	"gopkg.in/yaml.v2"
 )
 
 // Generator - generates the dependabot.yml in the specified repo path.
-func Generator(repoPath string) {
+func Generator(logger *heybo.Logger, repoPath string, verbose bool) {
+	logger.Trace("Setting up filesystem.")
 	fs := afero.NewOsFs()
+	logger.Debug("Getting platform ecosystems.")
 	bundler := platform(fs, `Gemfile|Gemfile\.lock`, repoPath, "bundler")
 	cargo := platform(fs, `Cargo\.toml`, repoPath, "cargo")
 	composer := platform(fs, `composer\.json`, repoPath, "composer")
@@ -34,13 +37,23 @@ func Generator(repoPath string) {
 	nuget := platform(fs, `\.nuspec`, repoPath, "nuget")
 	pip := platform(fs, `requirements\.txt|requirement\.txt|Pipfile|Pipfile\.lock|setup\.py|requirements\.in|pyproject\.toml`, repoPath, "pip")
 	terraform := platform(fs, `(.*)\.tf`, repoPath, "terraform")
+	logger.Info("Got platform ecosystems.")
+	logger.Debug("Begin joining updates.")
 	updates := joinUpdates(bundler, cargo, composer, docker, elm, gitsubmodules, githubActual, gomod, gradle, hexmix, maven, npm, nuget, pip, terraform)
+	logger.Info("Joined all updates.")
+	logger.Debug("Building configuration.")
 	config := Configuration{
 		Version: 2,
 		Updates: updates,
 	}
-	outputConfig(config)
+	logger.Info("Configuration complete.")
+	if verbose {
+		logger.Trace("Output configuration to standard output.")
+		outputConfig(config)
+	}
+	logger.Debug("Writing configuration.")
 	writeConfig(fs, repoPath, config)
+	logger.Info("Done.")
 }
 
 func platform(fs afero.Fs, regex string, repoPath string, ecosystem string) []Update {
@@ -73,7 +86,6 @@ func directoryParser(fs afero.Fs, regex string, repoPath string) []string {
 	}
 	var directory []string
 	for _, dots := range dotDirectory {
-		fmt.Println(len(dots))
 		if len(dots) == 1 {
 			slashes := strings.Replace(dots, ".", "/", 1)
 			directory = append(directory, slashes)
@@ -81,7 +93,6 @@ func directoryParser(fs afero.Fs, regex string, repoPath string) []string {
 			directory = append(directory, dots)
 		}
 	}
-	fmt.Println(directory)
 	return directory
 }
 
@@ -120,6 +131,9 @@ func joinUpdates(updates ...[]Update) []Update {
 	for _, update := range updates {
 		joinedUpdate = append(joinedUpdate, update...)
 	}
+	if len(joinedUpdate) > 200 {
+		joinedUpdate = joinedUpdate[:200]
+	}
 	return joinedUpdate
 }
 
@@ -128,6 +142,7 @@ func outputConfig(config Configuration) {
 	if err != nil {
 		fmt.Println(err)
 	}
+	fmt.Println()
 	fmt.Println(string(yamlOutput))
 }
 
@@ -135,7 +150,7 @@ func writeConfig(fs afero.Fs, repoPath string, config Configuration) {
 	githubPath := path.Join(repoPath, ".github", "dependabot.yml")
 	githubDir := path.Join(repoPath, ".github")
 	if _, err := fs.Stat(githubDir); os.IsNotExist(err) {
-		fs.Mkdir(githubDir, 0755)
+		_ = fs.Mkdir(githubDir, 0755)
 	}
 	outFile, err := fs.OpenFile(githubPath, os.O_WRONLY|os.O_CREATE|os.O_TRUNC, 0644)
 	if err != nil {
@@ -146,5 +161,5 @@ func writeConfig(fs afero.Fs, repoPath string, config Configuration) {
 	if encodeErr != nil {
 		fmt.Println(encodeErr)
 	}
-	yamlEncoder.Close()
+	_ = yamlEncoder.Close()
 }

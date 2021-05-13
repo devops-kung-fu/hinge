@@ -50,7 +50,18 @@ Flags:
   -v, --version   version for hinge
 ```
 
-###
+### hinge /path/to/repository
+
+Running `hinge` with the path to the root of the repository will write the configuration to `.github/dependabot.yml`.
+
+```bash
+$ hinge .                                                
+Hinge
+https://github.com/devops-kung-fu/hinge
+Version: 1.0.0
+```
+
+In the above example we are at the root of the repository.
 
 ### hinge -h|--help
 

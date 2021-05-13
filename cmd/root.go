@@ -27,7 +27,7 @@ var (
 			case trace:
 				heyBo.ChangeGlobalLevel(heybo.ALL)
 			case debug:
-				heyBo.ChangeGlobalLevel(heybo.DEBUG)
+				heyBo.ChangeGlobalLevel(heybo.TRACE)
 			}
 			heyBo.ChangeTagText(heybo.INFO, "pass")
 			if len(args) == 0 {

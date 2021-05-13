@@ -132,7 +132,7 @@ func joinUpdates(updates ...[]Update) []Update {
 		joinedUpdate = append(joinedUpdate, update...)
 	}
 	if len(joinedUpdate) > 200 {
-		joinedUpdate = joinedUpdate[:199]
+		joinedUpdate = joinedUpdate[:200]
 	}
 	return joinedUpdate
 }

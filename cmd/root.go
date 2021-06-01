@@ -4,7 +4,6 @@ package cmd
 import (
 	"fmt"
 	"os"
-
 	"github.com/devops-kung-fu/heybo"
 	"github.com/devops-kung-fu/hinge/lib"
 	"github.com/gookit/color"
@@ -16,6 +15,10 @@ var (
 	verbose bool
 	trace   bool
 	debug   bool
+	interval string
+	day string
+	time string
+	timeZone string
 	rootCmd = &cobra.Command{
 		Use:     "hinge [flags] path/to/repo",
 		Example: "  hinge path/to/repo",
@@ -56,8 +59,12 @@ func Execute() {
 
 func init() {
 	rootCmd.PersistentFlags().BoolVarP(&verbose, "verbose", "v", false, "Displays dependabot.yml configuration in stardard output.")
-	rootCmd.PersistentFlags().BoolVarP(&trace, "trace", "t", false, "Displays trace level log messages.")
-	rootCmd.PersistentFlags().BoolVarP(&debug, "debug", "d", false, "Displays debug level log messages.")
+	rootCmd.PersistentFlags().BoolVar(&trace, "trace", false, "Displays trace level log messages.")
+	rootCmd.PersistentFlags().BoolVar(&debug, "debug", false, "Displays debug level log messages.")
+	rootCmd.PersistentFlags().StringVarP(&interval, "interval", "i", "daily", "How often to check for new versions.")
+	rootCmd.PersistentFlags().StringVarP(&day, "day", "d", "daily", "Specify a day to check for updates.")
+	rootCmd.PersistentFlags().StringVarP(&time, "time", "t", "05:00", "Specify a time of day to check for updates (format: hh:mm).")
+	rootCmd.PersistentFlags().StringVarP(&timeZone, "timezone", "z", "UTC", "Specify a time zone. The time zone identifier must be from the Time Zone database maintained by IANA.")
 	color.Style{color.FgWhite, color.OpBold}.Println("Hinge")
 	fmt.Println("https://github.com/devops-kung-fu/hinge")
 	fmt.Printf("Version: %s\n", version)

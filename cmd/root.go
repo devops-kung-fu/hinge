@@ -3,23 +3,23 @@ package cmd
 
 import (
 	"fmt"
-	"os"
 	"github.com/devops-kung-fu/heybo"
 	"github.com/devops-kung-fu/hinge/lib"
 	"github.com/gookit/color"
 	"github.com/spf13/cobra"
+	"os"
 )
 
 var (
-	version = "0.0.9"
-	verbose bool
-	trace   bool
-	debug   bool
+	version  = "0.0.9"
+	verbose  bool
+	trace    bool
+	debug    bool
 	interval string
-	day string
-	time string
+	day      string
+	time     string
 	timeZone string
-	rootCmd = &cobra.Command{
+	rootCmd  = &cobra.Command{
 		Use:     "hinge [flags] path/to/repo",
 		Example: "  hinge path/to/repo",
 		Short:   "Creates and updates your Dependabot config.",
@@ -43,7 +43,18 @@ var (
 				_ = cmd.Usage()
 			} else {
 				repoPath := args[0]
-				lib.Generator(heyBo, repoPath, verbose)
+				schedule := lib.Schedule{
+					Interval: "daily",
+					Time: "05:00",
+					TimeZone: "UTC",
+				}
+				switch {
+				case interval == "daily":
+					schedule.Interval = interval
+					schedule.Time = time
+					schedule.TimeZone = timeZone
+				}
+				lib.Generator(heyBo, repoPath, verbose, schedule)
 			}
 		},
 	}

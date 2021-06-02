@@ -30,7 +30,7 @@ sudo mv hinge-1.0.0-linux-amd64 /usr/local/bin/hinge
 ```
 Hinge
 https://github.com/devops-kung-fu/hinge
-Version: 0.0.9
+Version: 1.0.0
 
 Creates and updates your Dependabot config.
 

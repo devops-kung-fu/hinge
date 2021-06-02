@@ -11,7 +11,7 @@ import (
 )
 
 var (
-	version  = "0.0.12"
+	version  = "0.1.0"
 	verbose  bool
 	trace    bool
 	debug    bool

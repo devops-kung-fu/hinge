@@ -11,7 +11,7 @@ import (
 )
 
 var (
-	version  = "0.0.9"
+	version  = "0.0.11"
 	verbose  bool
 	trace    bool
 	debug    bool
@@ -32,7 +32,7 @@ var (
 			case debug:
 				heyBo.ChangeGlobalLevel(heybo.TRACE)
 			}
-			heyBo.ChangeTagText(heybo.INFO, "pass")
+			heyBo.ChangeTagText(heybo.INFO, "PASS")
 			if len(args) == 0 {
 				color.Style{color.FgRed, color.OpBold}.Println("Please provide the path to the repository.")
 				fmt.Println()

@@ -74,7 +74,7 @@ func directoryParser(fs afero.Fs, regex string, repoPath string) []string {
 			cleanFile := strings.Replace(file, repoPath, "", 1)
 			cleanDiscovery = append(cleanDiscovery, cleanFile)
 		} else if strings.HasPrefix(file, ".github") {
-			cleanDiscovery = append(cleanDiscovery, "/"+file)
+			cleanDiscovery = append(cleanDiscovery, "/" + file)
 		} else {
 			cleanDiscovery = append(cleanDiscovery, file)
 		}

@@ -12,31 +12,31 @@ import (
 )
 
 // Generator - generates the dependabot.yml in the specified repo path.
-func Generator(logger *heybo.Logger, repoPath string, verbose bool) {
+func Generator(logger *heybo.Logger, repoPath string, verbose bool, schedule Schedule) {
 	logger.Trace("Setting up filesystem.")
 	fs := afero.NewOsFs()
 	logger.Debug("Getting platform ecosystems.")
-	bundler := platform(fs, `Gemfile|Gemfile\.lock`, repoPath, "bundler")
-	cargo := platform(fs, `Cargo\.toml`, repoPath, "cargo")
-	composer := platform(fs, `composer\.json`, repoPath, "composer")
-	docker := platform(fs, `Dockerfile(.*)|docker\-compose\.yml`, repoPath, "docker")
-	elm := platform(fs, `elm\-package\.json`, repoPath, "elm")
-	gitsubmodules := platform(fs, `\.gitmodules`, repoPath, "gitsubmodule")
-	github := platform(fs, `(.*)\.(yaml|yml)`, repoPath, "github-actions")
+	bundler := platform(fs, `Gemfile|Gemfile\.lock`, repoPath, "bundler", schedule)
+	cargo := platform(fs, `Cargo\.toml`, repoPath, "cargo", schedule)
+	composer := platform(fs, `composer\.json`, repoPath, "composer", schedule)
+	docker := platform(fs, `Dockerfile(.*)|docker\-compose\.yml`, repoPath, "docker", schedule)
+	elm := platform(fs, `elm\-package\.json`, repoPath, "elm", schedule)
+	gitsubmodules := platform(fs, `\.gitmodules`, repoPath, "gitsubmodule", schedule)
+	github := platform(fs, `(.*)\.(yaml|yml)`, repoPath, "github-actions", schedule)
 	var githubActual []Update
 	for _, githubPath := range github {
 		if strings.Contains(githubPath.Directory, ".github/workflows") {
 			githubActual = append(githubActual, githubPath)
 		}
 	}
-	gomod := platform(fs, `go\.mod`, repoPath, "gomod")
-	gradle := platform(fs, `build\.gradle|build\.gradle\.kts`, repoPath, "gradle")
-	hexmix := platform(fs, `mix\.exs|mix\.lock`, repoPath, "mix")
-	maven := platform(fs, `pom\.xml`, repoPath, "maven")
-	npm := platform(fs, `package\.json|package\-lock\.json`, repoPath, "npm")
-	nuget := platform(fs, `\.nuspec`, repoPath, "nuget")
-	pip := platform(fs, `requirements\.txt|requirement\.txt|Pipfile|Pipfile\.lock|setup\.py|requirements\.in|pyproject\.toml`, repoPath, "pip")
-	terraform := platform(fs, `(.*)\.tf`, repoPath, "terraform")
+	gomod := platform(fs, `go\.mod`, repoPath, "gomod", schedule)
+	gradle := platform(fs, `build\.gradle|build\.gradle\.kts`, repoPath, "gradle", schedule)
+	hexmix := platform(fs, `mix\.exs|mix\.lock`, repoPath, "mix", schedule)
+	maven := platform(fs, `pom\.xml`, repoPath, "maven", schedule)
+	npm := platform(fs, `package\.json|package\-lock\.json`, repoPath, "npm", schedule)
+	nuget := platform(fs, `\.nuspec`, repoPath, "nuget", schedule)
+	pip := platform(fs, `requirements\.txt|requirement\.txt|Pipfile|Pipfile\.lock|setup\.py|requirements\.in|pyproject\.toml`, repoPath, "pip", schedule)
+	terraform := platform(fs, `(.*)\.tf`, repoPath, "terraform", schedule)
 	logger.Info("Got platform ecosystems.")
 	logger.Debug("Begin joining updates.")
 	updates := joinUpdates(bundler, cargo, composer, docker, elm, gitsubmodules, githubActual, gomod, gradle, hexmix, maven, npm, nuget, pip, terraform)
@@ -56,10 +56,10 @@ func Generator(logger *heybo.Logger, repoPath string, verbose bool) {
 	logger.Info("Done.")
 }
 
-func platform(fs afero.Fs, regex string, repoPath string, ecosystem string) []Update {
+func platform(fs afero.Fs, regex string, repoPath string, ecosystem string, schedule Schedule) []Update {
 	dirs := directoryParser(fs, regex, repoPath)
 	uniqueDirs := removeDuplicates(dirs)
-	updates := updatesBuilder(uniqueDirs, ecosystem)
+	updates := updatesBuilder(uniqueDirs, ecosystem, schedule)
 	return updates
 }
 
@@ -109,17 +109,13 @@ func removeDuplicates(stringSlice []string) []string {
 	return list
 }
 
-func updatesBuilder(directories []string, ecosystem string) []Update {
+func updatesBuilder(directories []string, ecosystem string, schedule Schedule) []Update {
 	var updates []Update
 	for _, dir := range directories {
 		update := Update{
 			PackageEcosystem: ecosystem,
 			Directory:        dir,
-			Schedule: struct {
-				Interval string `yaml:"interval"`
-			}{
-				Interval: "daily",
-			},
+			Schedule:         schedule,
 		}
 		updates = append(updates, update)
 	}

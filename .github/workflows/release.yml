@@ -26,7 +26,7 @@ jobs:
           release_name: Release ${{ github.ref }}
           body: |
             This release has the following changes:
-            - Truncate updates if greater than 200.
+            - Interval Options.
           draft: false
           prerelease: false
 

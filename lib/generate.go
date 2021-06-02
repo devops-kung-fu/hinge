@@ -115,7 +115,7 @@ func updatesBuilder(directories []string, ecosystem string, schedule Schedule) [
 		update := Update{
 			PackageEcosystem: ecosystem,
 			Directory:        dir,
-			Schedule: schedule,
+			Schedule:         schedule,
 		}
 		updates = append(updates, update)
 	}

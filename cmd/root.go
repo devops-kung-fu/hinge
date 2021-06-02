@@ -45,14 +45,19 @@ var (
 				repoPath := args[0]
 				schedule := lib.Schedule{
 					Interval: "daily",
-					Time: "05:00",
-					TimeZone: "UTC",
 				}
 				switch {
 				case interval == "daily":
 					schedule.Interval = interval
 					schedule.Time = time
 					schedule.TimeZone = timeZone
+				case interval == "weekly":
+					schedule.Interval = interval
+					schedule.Day = day
+					schedule.Time = time
+					schedule.TimeZone = timeZone
+				case interval == "monthly":
+					schedule.Interval = interval
 				}
 				lib.Generator(heyBo, repoPath, verbose, schedule)
 			}

@@ -2,7 +2,7 @@
 
 # Hinge
 
-[![Go Report Card](https://goreportcard.com/badge/github.com/devops-kung-fu/hinge)](https://goreportcard.com/report/github.com/devops-kung-fu/hinge) ![GitHub release (latest by date)](https://img.shields.io/github/v/release/devops-kung-fu/hinge) [![codecov](https://codecov.io/gh/devops-kung-fu/hinge/branch/main/graph/badge.svg?token=BIROb1Npbk)](https://codecov.io/gh/devops-kung-fu/hinge)[![SBOM](https://img.shields.io/badge/CyloneDX-SBoM-informational)](hinge-sbom.json)
+[![Go Report Card](https://goreportcard.com/badge/github.com/devops-kung-fu/hinge)](https://goreportcard.com/report/github.com/devops-kung-fu/hinge) ![GitHub release (latest by date)](https://img.shields.io/github/v/release/devops-kung-fu/hinge) [![codecov](https://codecov.io/gh/devops-kung-fu/hinge/branch/main/graph/badge.svg?token=BIROb1Npbk)](https://codecov.io/gh/devops-kung-fu/hinge) [![SBOM](https://img.shields.io/badge/CyloneDX-SBoM-informational)](hinge-sbom.json)
 
 
 Creates and updates your Dependabot configuration file, `dependabot.yml`.

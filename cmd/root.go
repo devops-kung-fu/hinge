@@ -3,11 +3,12 @@ package cmd
 
 import (
 	"fmt"
-	"github.com/devops-kung-fu/heybo"
+	"os"
+
 	"github.com/devops-kung-fu/hinge/lib"
+	"github.com/devops-kung-fu/tailog"
 	"github.com/gookit/color"
 	"github.com/spf13/cobra"
-	"os"
 )
 
 var (
@@ -25,14 +26,14 @@ var (
 		Short:   "Creates and updates your Dependabot config.",
 		Version: version,
 		Run: func(cmd *cobra.Command, args []string) {
-			heyBo := heybo.HeyBo(heybo.DEBUG)
+			tailog := tailog.Tailog(tailog.DEBUG)
 			switch {
 			case trace:
-				heyBo.ChangeGlobalLevel(heybo.ALL)
+				_ = tailog.ChangeGlobalLevel(0)
 			case debug:
-				heyBo.ChangeGlobalLevel(heybo.TRACE)
+				_ = tailog.ChangeGlobalLevel(1)
 			}
-			heyBo.ChangeTagText(heybo.INFO, "PASS")
+
 			if len(args) == 0 {
 				color.Style{color.FgRed, color.OpBold}.Println("Please provide the path to the repository.")
 				fmt.Println()
@@ -59,7 +60,7 @@ var (
 				case interval == "monthly":
 					schedule.Interval = interval
 				}
-				lib.Generator(heyBo, repoPath, verbose, schedule)
+				lib.Generator(tailog, repoPath, verbose, schedule)
 			}
 		},
 	}

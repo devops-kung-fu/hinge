@@ -2,7 +2,8 @@
 
 # Hinge
 
-[![Go Report Card](https://goreportcard.com/badge/github.com/devops-kung-fu/hinge)](https://goreportcard.com/report/github.com/devops-kung-fu/hinge) ![GitHub release (latest by date)](https://img.shields.io/github/v/release/devops-kung-fu/hinge) [![codecov](https://codecov.io/gh/devops-kung-fu/hinge/branch/main/graph/badge.svg?token=BIROb1Npbk)](https://codecov.io/gh/devops-kung-fu/hinge)
+[![Go Report Card](https://goreportcard.com/badge/github.com/devops-kung-fu/hinge)](https://goreportcard.com/report/github.com/devops-kung-fu/hinge) ![GitHub release (latest by date)](https://img.shields.io/github/v/release/devops-kung-fu/hinge) [![codecov](https://codecov.io/gh/devops-kung-fu/hinge/branch/main/graph/badge.svg?token=BIROb1Npbk)](https://codecov.io/gh/devops-kung-fu/hinge)[![SBOM](https://img.shields.io/badge/CyloneDX-SBoM-informational)](hinge-sbom.json)
+
 
 Creates and updates your Dependabot configuration file, `dependabot.yml`.
 
@@ -51,3 +52,13 @@ Flags:
   -v, --verbose           Displays dependabot.yml configuration in stardard output.
       --version           version for hinge
 ```
+
+## Software Bill of Materials
+
+```hinge``` uses [Hookz](https://github.com/devops-kung-fu/hookz) and CycloneDX to generate a Software Bill of Materials in CycloneDX format every time a developer commits code to this repository. More information for CycloneDX is available [here](https://cyclonedx.org)
+
+The current SBoM for ```hinge``` is available [here](hinge-sbom.json).
+
+## Credits
+
+A big thank-you to our friends at [Freepik](https://www.freepik.com) for the ```hinge``` logo.

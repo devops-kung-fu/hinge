@@ -6,13 +6,13 @@ import (
 	"path"
 	"strings"
 
-	"github.com/devops-kung-fu/heybo"
+	"github.com/devops-kung-fu/tailog"
 	"github.com/spf13/afero"
 	"gopkg.in/yaml.v2"
 )
 
 // Generator - generates the dependabot.yml in the specified repo path.
-func Generator(logger *heybo.Logger, repoPath string, verbose bool, schedule Schedule) {
+func Generator(logger *tailog.Logger, repoPath string, verbose bool, schedule Schedule) {
 	logger.Trace("Setting up filesystem.")
 	fs := afero.NewOsFs()
 	logger.Debug("Getting platform ecosystems.")

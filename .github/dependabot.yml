@@ -3,14 +3,12 @@ updates:
 - package-ecosystem: github-actions
   directory: /.github/workflows
   schedule:
-    interval: weekly
-    day: tuesday
-    time: "12:00"
-    timezone: America/New_York
+    interval: daily
+    time: "05:00"
+    timezone: UTC
 - package-ecosystem: gomod
   directory: /
   schedule:
-    interval: weekly
-    day: tuesday
-    time: "12:00"
-    timezone: America/New_York
+    interval: daily
+    time: "05:00"
+    timezone: UTC

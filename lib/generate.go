@@ -7,6 +7,7 @@ import (
 	"strings"
 
 	"github.com/devops-kung-fu/tailog"
+	"github.com/gookit/color"
 	"github.com/spf13/afero"
 	"gopkg.in/yaml.v2"
 )
@@ -37,23 +38,31 @@ func Generator(logger *tailog.Logger, repoPath string, verbose bool, schedule Sc
 	nuget := platform(fs, `\.nuspec`, repoPath, "nuget", schedule)
 	pip := platform(fs, `requirements\.txt|requirement\.txt|Pipfile|Pipfile\.lock|setup\.py|requirements\.in|pyproject\.toml`, repoPath, "pip", schedule)
 	terraform := platform(fs, `(.*)\.tf`, repoPath, "terraform", schedule)
-	logger.Info("Got platform ecosystems.")
-	logger.Debug("Begin joining updates.")
+	color.Style{color.FgLightBlue}.Print(" ■ ")
+	fmt.Println("Got platform ecosystems")
+	// logger.Info("Got platform ecosystems.")
+	// logger.Debug("Begin joining updates.")
 	updates := joinUpdates(bundler, cargo, composer, docker, elm, gitsubmodules, githubActual, gomod, gradle, hexmix, maven, npm, nuget, pip, terraform)
-	logger.Info("Joined all updates.")
+	color.Style{color.FgLightBlue}.Print(" ■ ")
+	fmt.Println("Joined all updates")
+	// logger.Info("Joined all updates.")
 	logger.Debug("Building configuration.")
 	config := Configuration{
 		Version: 2,
 		Updates: updates,
 	}
-	logger.Info("Configuration complete.")
+	color.Style{color.FgLightBlue}.Print(" ■ ")
+	fmt.Println("Configuration complete")
+	//logger.Info("Configuration complete.")
 	if verbose {
 		logger.Trace("Output configuration to standard output.")
 		outputConfig(config)
 	}
 	logger.Debug("Writing configuration.")
 	writeConfig(fs, repoPath, config)
-	logger.Info("Done.")
+	//logger.Info("Done.")
+	color.Style{color.FgGreen}.Print(" ■ ")
+	fmt.Println("Done!")
 }
 
 func platform(fs afero.Fs, regex string, repoPath string, ecosystem string, schedule Schedule) []Update {

@@ -25,6 +25,18 @@ var (
 		Example: "  hinge path/to/repo",
 		Short:   "Creates and updates your Dependabot config.",
 		Version: version,
+		PreRun: func(cmd *cobra.Command, args []string) {
+			if len(args) == 0 {
+				color.Style{color.FgRed, color.OpBold}.Println("Please provide the path to the repository.")
+				fmt.Println()
+				_ = cmd.Usage()
+			} else if len(args) > 1 {
+				color.Style{color.FgRed, color.OpBold}.Println("Only one path is allowed.")
+				fmt.Println()
+				_ = cmd.Usage()
+			}
+			os.Exit(1)
+		},
 		Run: func(cmd *cobra.Command, args []string) {
 			tailog := tailog.Tailog(tailog.DEBUG)
 			switch {
@@ -34,34 +46,25 @@ var (
 				_ = tailog.ChangeGlobalLevel(1)
 			}
 
-			if len(args) == 0 {
-				color.Style{color.FgRed, color.OpBold}.Println("Please provide the path to the repository.")
-				fmt.Println()
-				_ = cmd.Usage()
-			} else if len(args) > 1 {
-				color.Style{color.FgRed, color.OpBold}.Println("Only one path is allowed.")
-				fmt.Println()
-				_ = cmd.Usage()
-			} else {
-				repoPath := args[0]
-				schedule := lib.Schedule{
-					Interval: "daily",
-				}
-				switch {
-				case interval == "daily":
-					schedule.Interval = interval
-					schedule.Time = time
-					schedule.TimeZone = timeZone
-				case interval == "weekly":
-					schedule.Interval = interval
-					schedule.Day = day
-					schedule.Time = time
-					schedule.TimeZone = timeZone
-				case interval == "monthly":
-					schedule.Interval = interval
-				}
-				lib.Generator(tailog, repoPath, verbose, schedule)
+			repoPath := args[0]
+			schedule := lib.Schedule{
+				Interval: "daily",
 			}
+			switch {
+			case interval == "daily":
+				schedule.Interval = interval
+				schedule.Time = time
+				schedule.TimeZone = timeZone
+			case interval == "weekly":
+				schedule.Interval = interval
+				schedule.Day = day
+				schedule.Time = time
+				schedule.TimeZone = timeZone
+			case interval == "monthly":
+				schedule.Interval = interval
+			}
+			lib.Generator(tailog, repoPath, verbose, schedule)
+
 		},
 	}
 )

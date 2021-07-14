@@ -3,15 +3,16 @@ package cmd
 
 import (
 	"fmt"
-	"github.com/devops-kung-fu/heybo"
+	"os"
+
 	"github.com/devops-kung-fu/hinge/lib"
+	"github.com/devops-kung-fu/tailog"
 	"github.com/gookit/color"
 	"github.com/spf13/cobra"
-	"os"
 )
 
 var (
-	version  = "0.1.0"
+	version  = "0.1.1"
 	verbose  bool
 	trace    bool
 	debug    bool
@@ -24,15 +25,7 @@ var (
 		Example: "  hinge path/to/repo",
 		Short:   "Creates and updates your Dependabot config.",
 		Version: version,
-		Run: func(cmd *cobra.Command, args []string) {
-			heyBo := heybo.HeyBo(heybo.DEBUG)
-			switch {
-			case trace:
-				heyBo.ChangeGlobalLevel(heybo.ALL)
-			case debug:
-				heyBo.ChangeGlobalLevel(heybo.TRACE)
-			}
-			heyBo.ChangeTagText(heybo.INFO, "PASS")
+		PreRun: func(cmd *cobra.Command, args []string) {
 			if len(args) == 0 {
 				color.Style{color.FgRed, color.OpBold}.Println("Please provide the path to the repository.")
 				fmt.Println()
@@ -41,26 +34,37 @@ var (
 				color.Style{color.FgRed, color.OpBold}.Println("Only one path is allowed.")
 				fmt.Println()
 				_ = cmd.Usage()
-			} else {
-				repoPath := args[0]
-				schedule := lib.Schedule{
-					Interval: "daily",
-				}
-				switch {
-				case interval == "daily":
-					schedule.Interval = interval
-					schedule.Time = time
-					schedule.TimeZone = timeZone
-				case interval == "weekly":
-					schedule.Interval = interval
-					schedule.Day = day
-					schedule.Time = time
-					schedule.TimeZone = timeZone
-				case interval == "monthly":
-					schedule.Interval = interval
-				}
-				lib.Generator(heyBo, repoPath, verbose, schedule)
 			}
+			os.Exit(1)
+		},
+		Run: func(cmd *cobra.Command, args []string) {
+			tailog := tailog.Tailog(tailog.DEBUG)
+			switch {
+			case trace:
+				_ = tailog.ChangeGlobalLevel(0)
+			case debug:
+				_ = tailog.ChangeGlobalLevel(1)
+			}
+
+			repoPath := args[0]
+			schedule := lib.Schedule{
+				Interval: "daily",
+			}
+			switch {
+			case interval == "daily":
+				schedule.Interval = interval
+				schedule.Time = time
+				schedule.TimeZone = timeZone
+			case interval == "weekly":
+				schedule.Interval = interval
+				schedule.Day = day
+				schedule.Time = time
+				schedule.TimeZone = timeZone
+			case interval == "monthly":
+				schedule.Interval = interval
+			}
+			lib.Generator(tailog, repoPath, verbose, schedule)
+
 		},
 	}
 )

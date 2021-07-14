@@ -1,0 +1,8 @@
+# Test Comment
+.github/workflows/release.yml
+hinge-sbom.json
+hinge.yaml
+hinge
+go.sum
+go.mod
+img

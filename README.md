@@ -61,4 +61,4 @@ The current SBoM for ```hinge``` is available [here](hinge-sbom.json).
 
 ## Credits
 
-A big thank-you to our friends at [Freepik](https://www.freepik.com) for the ```hinge``` logo.
+A big thank-you to our friends at [Freepik](https://www.freepik.com) for the ```hinge``` logo. 

@@ -1,10 +1,10 @@
 {
   "bomFormat": "CycloneDX",
   "specVersion": "1.2",
-  "serialNumber": "urn:uuid:c9e967ef-9015-4f27-897b-9011b00a203d",
+  "serialNumber": "urn:uuid:7206b67d-bb64-4fba-bea1-c4fb3c74145c",
   "version": 1,
   "metadata": {
-    "timestamp": "2021-07-14T14:32:52-06:00",
+    "timestamp": "2021-07-22T20:58:27-06:00",
     "tools": [
       {
         "vendor": "CycloneDX",
@@ -31,11 +31,11 @@
       }
     ],
     "component": {
-      "bom-ref": "pkg:golang/github.com/devops-kung-fu/hinge@v0.0.0-20210714142452-6a754f3bc11f",
+      "bom-ref": "pkg:golang/github.com/devops-kung-fu/hinge@v0.0.0-20210714162810-e7d7d897d5dd",
       "type": "application",
       "name": "github.com/devops-kung-fu/hinge",
-      "version": "v0.0.0-20210714142452-6a754f3bc11f",
-      "purl": "pkg:golang/github.com/devops-kung-fu/hinge@v0.0.0-20210714142452-6a754f3bc11f",
+      "version": "v0.0.0-20210714162810-e7d7d897d5dd",
+      "purl": "pkg:golang/github.com/devops-kung-fu/hinge@v0.0.0-20210714162810-e7d7d897d5dd",
       "externalReferences": [
         {
           "url": "https://github.com/devops-kung-fu/hinge",
@@ -45,26 +45,6 @@
     }
   },
   "components": [
-    {
-      "bom-ref": "pkg:golang/github.com/devops-kung-fu/tailog@v0.1.7",
-      "type": "library",
-      "name": "github.com/devops-kung-fu/tailog",
-      "version": "v0.1.7",
-      "scope": "required",
-      "hashes": [
-        {
-          "alg": "SHA-256",
-          "content": "37578cf1cf65c016cea5e78594f7b074a8c09fcc401d0593f329a409289885d1"
-        }
-      ],
-      "purl": "pkg:golang/github.com/devops-kung-fu/tailog@v0.1.7",
-      "externalReferences": [
-        {
-          "url": "https://github.com/devops-kung-fu/tailog",
-          "type": "vcs"
-        }
-      ]
-    },
     {
       "bom-ref": "pkg:golang/github.com/gookit/color@v1.4.2",
       "type": "library",
@@ -259,13 +239,6 @@
   ],
   "dependencies": [
     {
-      "ref": "pkg:golang/github.com/devops-kung-fu/tailog@v0.1.7",
-      "dependsOn": [
-        "pkg:golang/github.com/gookit/color@v1.4.2",
-        "pkg:golang/golang.org/x/sys@v0.0.0-20210630005230-0f9fa26af87c"
-      ]
-    },
-    {
       "ref": "pkg:golang/github.com/gookit/color@v1.4.2",
       "dependsOn": [
         "pkg:golang/golang.org/x/sys@v0.0.0-20210630005230-0f9fa26af87c",
@@ -305,12 +278,12 @@
       "ref": "pkg:golang/gopkg.in/yaml.v2@v2.4.0"
     },
     {
-      "ref": "pkg:golang/github.com/devops-kung-fu/hinge@v0.0.0-20210714142452-6a754f3bc11f",
+      "ref": "pkg:golang/github.com/devops-kung-fu/hinge@v0.0.0-20210714162810-e7d7d897d5dd",
       "dependsOn": [
-        "pkg:golang/github.com/devops-kung-fu/tailog@v0.1.7",
         "pkg:golang/github.com/gookit/color@v1.4.2",
         "pkg:golang/github.com/spf13/afero@v1.6.0",
         "pkg:golang/github.com/spf13/cobra@v1.2.1",
+        "pkg:golang/golang.org/x/sys@v0.0.0-20210630005230-0f9fa26af87c",
         "pkg:golang/golang.org/x/text@v0.3.6",
         "pkg:golang/gopkg.in/yaml.v2@v2.4.0",
         "pkg:golang/std@1.16.6"

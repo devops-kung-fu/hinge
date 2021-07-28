@@ -6,7 +6,6 @@ import (
 	"os"
 
 	"github.com/devops-kung-fu/hinge/lib"
-	"github.com/devops-kung-fu/tailog"
 	"github.com/gookit/color"
 	"github.com/spf13/cobra"
 )
@@ -30,22 +29,15 @@ var (
 				color.Style{color.FgRed, color.OpBold}.Println("Please provide the path to the repository.")
 				fmt.Println()
 				_ = cmd.Usage()
+				os.Exit(1)
 			} else if len(args) > 1 {
 				color.Style{color.FgRed, color.OpBold}.Println("Only one path is allowed.")
 				fmt.Println()
 				_ = cmd.Usage()
+				os.Exit(1)
 			}
-			os.Exit(1)
 		},
 		Run: func(cmd *cobra.Command, args []string) {
-			tailog := tailog.Tailog(tailog.DEBUG)
-			switch {
-			case trace:
-				_ = tailog.ChangeGlobalLevel(0)
-			case debug:
-				_ = tailog.ChangeGlobalLevel(1)
-			}
-
 			repoPath := args[0]
 			schedule := lib.Schedule{
 				Interval: "daily",
@@ -63,7 +55,7 @@ var (
 			case interval == "monthly":
 				schedule.Interval = interval
 			}
-			lib.Generator(tailog, repoPath, verbose, schedule)
+			lib.Generator(repoPath, verbose, schedule)
 
 		},
 	}

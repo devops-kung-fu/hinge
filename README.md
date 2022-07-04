@@ -2,7 +2,10 @@
 
 # Hinge
 
-[![Go Report Card](https://goreportcard.com/badge/github.com/devops-kung-fu/hinge)](https://goreportcard.com/report/github.com/devops-kung-fu/hinge) ![GitHub release (latest by date)](https://img.shields.io/github/v/release/devops-kung-fu/hinge) [![codecov](https://codecov.io/gh/devops-kung-fu/hinge/branch/main/graph/badge.svg?token=BIROb1Npbk)](https://codecov.io/gh/devops-kung-fu/hinge) [![SBOM](https://img.shields.io/badge/CyloneDX-SBoM-informational)](hinge-sbom.json)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/devops-kung-fu/hinge) 
+[![Go Report Card](https://goreportcard.com/badge/github.com/devops-kung-fu/hinge)](https://goreportcard.com/report/github.com/devops-kung-fu/hinge) 
+[![codecov](https://codecov.io/gh/devops-kung-fu/hinge/branch/main/graph/badge.svg?token=BIROb1Npbk)](https://codecov.io/gh/devops-kung-fu/hinge) 
+[![SBOM](https://img.shields.io/badge/CyloneDX-SBoM-informational)](hinge-sbom.json)
 
 
 Creates and updates your Dependabot configuration file, `dependabot.yml`.
@@ -17,7 +20,7 @@ Creates and updates your Dependabot configuration file, `dependabot.yml`.
 
 ## Installation
 
-To install Hinge, [download the latest release](https://github.com/devops-kung-fu/hinge/releases) , make it executable, rename it to `hinge` and move it to the `/usr/local/bin` directory for Linux, or on your `PATH` for other operating systems.
+To install ```hinge```, [download the latest release](https://github.com/devops-kung-fu/hinge/releases) , make it executable, rename it to `hinge` and move it to the `/usr/local/bin` directory for Linux, or on your `PATH` for other operating systems.
 
 ### Linux Example
 
@@ -53,9 +56,28 @@ Flags:
       --version           version for hinge
 ```
 
+## Development
+
+## Overview
+
+In order to use contribute and participate in the development of ```hinge``` you'll need to have an updated Go environment. Before you start, please view the [Contributing](CONTRIBUTING.md) and [Code of Conduct](CODE_OF_CONDUCT.md) files in this repository.
+
+## Prerequisites
+
+This project makes use of [DKFM](https://github.com/devops-kung-fu) tools such as [Hookz](https://github.com/devops-kung-fu/hookz) and other open source tooling. Install these tools with the following commands:
+
+``` bash
+
+go install github.com/devops-kung-fu/hookz@latest
+go install github.com/kisielk/errcheck@latest
+go install golang.org/x/lint/golint@latest
+go install github.com/fzipp/gocyclo@latest
+
+```
+
 ## Software Bill of Materials
 
-```hinge``` uses [Hookz](https://github.com/devops-kung-fu/hookz) and CycloneDX to generate a Software Bill of Materials in CycloneDX format every time a developer commits code to this repository. More information for CycloneDX is available [here](https://cyclonedx.org)
+```hinge``` uses the CycloneDX to generate a Software Bill of Materials in CycloneDX format (v1.4) every time a developer commits code to this repository (as long as [Hookz](https://github.com/devops-kung-fu/hookz) is being used and has been initialized in the working directory). More information for CycloneDX is available [here](https://cyclonedx.org)
 
 The current SBoM for ```hinge``` is available [here](hinge-sbom.json).
 

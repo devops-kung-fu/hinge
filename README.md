@@ -44,7 +44,7 @@ DKFM - DevOps Kung Fu Mafia
 https://github.com/devops-kung-fu/hinge
 Version: 1.0.0
 
-Creates and updates your Dependabot config.
+Creates or updates your Dependabot config.
 
 Usage:
   hinge [flags] path/to/repo
@@ -53,15 +53,24 @@ Examples:
   hinge path/to/repo
 
 Flags:
-  -d, --day string        Specify a day to check for updates. (default "daily")
+  -d, --day string        Specify a day to check for updates when using a weekly interval. (default "monday")
       --debug             Displays debug level log messages.
   -h, --help              help for hinge
   -i, --interval string   How often to check for new versions. (default "daily")
-  -t, --time string       Specify a time of day to check for updates (format: hh:mm). (default "05:00")
-  -z, --timezone string   Specify a time zone. The time zone identifier must be from the Time Zone database maintained by IANA. (default "UTC")
-  -v, --verbose           Displays dependabot.yml configuration in stardard output.
+  -t, --time string       Specify a time of day to check for updates using 24 hour format (format: hh:mm). (default "05:00")
+  -z, --timezone string   Specify a time zone. Valid timezones are available at https://en.wikipedia.org/wiki/List_of_tz_database_time_zones. (default "US/Pacific")
+  -v, --verbose           Displays command line output. (default true)
       --version           version for hinge
 ```
+### Flag Notes
+
+| Flag | Notes |
+|---|---|
+|-d, --day | Must be a valid day of the week. (monday, tuesday, wednesday, thursday, friday, saturday, sunday). Defaults to monday if using a weekly interval.|
+|-i, --interval | Must be one of the following: daily, weekly, monthly. Defaults to daily.|
+|-z, --timezone | Must be a timezone listed at https://en.wikipedia.org/wiki/List_of_tz_database_time_zones. Defaults to "US/Pacific if not explicitly defined.|
+
+
 
 ## Development
 

@@ -7,6 +7,7 @@ import (
 	"io/ioutil"
 	"log"
 	"os"
+	"path/filepath"
 	"strings"
 
 	"github.com/devops-kung-fu/common/util"
@@ -18,7 +19,7 @@ import (
 )
 
 var (
-	version = "0.1.1"
+	version = "1.0.0"
 	//Afs stores a global OS Filesystem that is used throughout hinge
 	Afs = &afero.Afero{Fs: afero.NewOsFs()}
 	//Verbose determines if the execution of hing should output verbose information
@@ -47,12 +48,22 @@ var (
 		},
 		PreRun: func(cmd *cobra.Command, args []string) {
 			if len(args) == 0 {
-				util.PrintErr(errors.New("please provide the path to the repository"))
+				util.PrintErr(errors.New("please provide the path to a git repository"))
 				_ = cmd.Usage()
 				os.Exit(1)
 			} else if len(args) > 1 {
 				util.PrintErr(errors.New("only one path is allowed"))
 				_ = cmd.Usage()
+				os.Exit(1)
+			}
+			path := filepath.Join(args[0], ".git")
+			//b, err := Afs.DirExists(".git")
+			b, err := Afs.DirExists(path)
+			util.IfErrorLog(err)
+
+			if !b {
+				e := errors.New("fatal: provided path does not contain a git repository")
+				util.PrintErr(e)
 				os.Exit(1)
 			}
 		},

@@ -62,6 +62,14 @@ Flags:
   -v, --verbose           Displays command line output. (default true)
       --version           version for hinge
 ```
+
+### Quickstart
+
+Once ```hinge``` is installed, you can run this command in the root of your git repository:
+
+``` bash
+hinge .
+```
 ### Flag Notes
 
 | Flag | Notes |

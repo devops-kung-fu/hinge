@@ -7,6 +7,7 @@ import (
 	"io/ioutil"
 	"log"
 	"os"
+	"strings"
 
 	"github.com/devops-kung-fu/common/util"
 	"github.com/gookit/color"
@@ -37,9 +38,7 @@ var (
 				log.SetOutput(ioutil.Discard)
 			}
 			util.DoIf(Verbose, func() {
-				fmt.Println()
-				color.Style{color.FgLightBlue, color.OpBold}.Println("HINGE")
-				fmt.Println()
+				color.Style{color.White, color.OpBold}.Println("hinge")
 				fmt.Println("DKFM - DevOps Kung Fu Mafia")
 				fmt.Println("https://github.com/devops-kung-fu/hinge")
 				fmt.Printf("Version: %s\n", version)
@@ -58,28 +57,12 @@ var (
 			}
 		},
 		Run: func(cmd *cobra.Command, args []string) {
-			repoPath := args[0]
-			schedule := lib.Schedule{
-				Interval: "daily",
-			}
-			switch {
-			case interval == "daily":
-				schedule.Interval = interval
-				schedule.Time = time
-				schedule.TimeZone = timeZone
-			case interval == "weekly":
-				schedule.Interval = interval
-				schedule.Day = day
-				schedule.Time = time
-				schedule.TimeZone = timeZone
-			case interval == "monthly":
-				schedule.Interval = interval
-			}
-			config, err := lib.Generate(Afs, repoPath, schedule)
+			config, err := lib.Generate(Afs, args[0], buildSchedule())
 			if err != nil {
 				log.Panic(err)
 			}
 			util.DoIf(Verbose, func() {
+				util.PrintInfof("Found %x ecosystems\n", len(config.Updates))
 				for _, update := range config.Updates {
 					util.PrintInfof("Processed Ecosystem: %s\n", update.PackageEcosystem)
 				}
@@ -102,7 +85,26 @@ func init() {
 	rootCmd.PersistentFlags().BoolVarP(&Verbose, "verbose", "v", true, "Displays command line output.")
 	rootCmd.PersistentFlags().BoolVar(&debug, "debug", false, "Displays debug level log messages.")
 	rootCmd.PersistentFlags().StringVarP(&interval, "interval", "i", "daily", "How often to check for new versions.")
-	rootCmd.PersistentFlags().StringVarP(&day, "day", "d", "daily", "Specify a day to check for updates.")
-	rootCmd.PersistentFlags().StringVarP(&time, "time", "t", "05:00", "Specify a time of day to check for updates (format: hh:mm).")
-	rootCmd.PersistentFlags().StringVarP(&timeZone, "timezone", "z", "UTC", "Specify a time zone. The time zone identifier must be from the Time Zone database maintained by IANA.")
+	rootCmd.PersistentFlags().StringVarP(&day, "day", "d", "monday", "Specify a day to check for updates when using a weekly interval.")
+	rootCmd.PersistentFlags().StringVarP(&time, "time", "t", "05:00", "Specify a time of day to check for updates using 24 hour format (format: hh:mm).")
+	rootCmd.PersistentFlags().StringVarP(&timeZone, "timezone", "z", "US/Pacific", "Specify a time zone. Valid timezones are available at https://en.wikipedia.org/wiki/List_of_tz_database_time_zones.")
+}
+
+func buildSchedule() (schedule lib.Schedule) {
+	schedule.Interval = strings.ToLower(schedule.Interval)
+	switch {
+	case interval == "daily":
+		schedule.Interval = interval
+		schedule.Time = time
+		schedule.TimeZone = timeZone
+	case interval == "weekly":
+		schedule.Interval = interval
+		schedule.Day = day
+		schedule.Time = time
+		schedule.TimeZone = timeZone
+	case interval == "monthly":
+		schedule.Interval = interval
+	}
+	schedule.Day = strings.ToLower(schedule.Day)
+	return schedule
 }

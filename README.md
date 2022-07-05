@@ -28,11 +28,19 @@ To install ```hinge```, [download the latest release](https://github.com/devops-
 sudo chmod +x hinge-1.0.0-linux-amd64
 sudo mv hinge-1.0.0-linux-amd64 /usr/local/bin/hinge
 ```
+### With a Go Development Environment
+
+If you have a Go development environment set up, you can also simply do this:
+
+``` bash
+go install github.com/devops-kung-fu/hinge@latest
+```
 
 ## Usage
 
 ```
 Hinge
+DKFM - DevOps Kung Fu Mafia
 https://github.com/devops-kung-fu/hinge
 Version: 1.0.0
 
@@ -51,7 +59,6 @@ Flags:
   -i, --interval string   How often to check for new versions. (default "daily")
   -t, --time string       Specify a time of day to check for updates (format: hh:mm). (default "05:00")
   -z, --timezone string   Specify a time zone. The time zone identifier must be from the Time Zone database maintained by IANA. (default "UTC")
-      --trace             Displays trace level log messages.
   -v, --verbose           Displays dependabot.yml configuration in stardard output.
       --version           version for hinge
 ```

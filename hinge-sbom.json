@@ -1,10 +1,10 @@
 {
   "bomFormat": "CycloneDX",
   "specVersion": "1.2",
-  "serialNumber": "urn:uuid:7a3bdb6c-4eb1-4b14-978a-50512046a583",
+  "serialNumber": "urn:uuid:ae455f40-80fd-45c2-ae50-9629fa0d9156",
   "version": 1,
   "metadata": {
-    "timestamp": "2022-07-05T10:36:53-06:00",
+    "timestamp": "2022-07-05T11:24:19-06:00",
     "tools": [
       {
         "vendor": "CycloneDX",
@@ -31,11 +31,11 @@
       }
     ],
     "component": {
-      "bom-ref": "pkg:golang/github.com/devops-kung-fu/hinge@v0.0.0-20220704101453-45d48b4c023d",
+      "bom-ref": "pkg:golang/github.com/devops-kung-fu/hinge@v0.0.0-20220705103559-d09c0a805ad3",
       "type": "application",
       "name": "github.com/devops-kung-fu/hinge",
-      "version": "v0.0.0-20220704101453-45d48b4c023d",
-      "purl": "pkg:golang/github.com/devops-kung-fu/hinge@v0.0.0-20220704101453-45d48b4c023d",
+      "version": "v0.0.0-20220705103559-d09c0a805ad3",
+      "purl": "pkg:golang/github.com/devops-kung-fu/hinge@v0.0.0-20220705103559-d09c0a805ad3",
       "externalReferences": [
         {
           "url": "https://github.com/devops-kung-fu/hinge",
@@ -285,7 +285,7 @@
       "ref": "pkg:golang/gopkg.in/yaml.v2@v2.4.0"
     },
     {
-      "ref": "pkg:golang/github.com/devops-kung-fu/hinge@v0.0.0-20220704101453-45d48b4c023d",
+      "ref": "pkg:golang/github.com/devops-kung-fu/hinge@v0.0.0-20220705103559-d09c0a805ad3",
       "dependsOn": [
         "pkg:golang/github.com/devops-kung-fu/common@v0.2.3",
         "pkg:golang/github.com/gookit/color@v1.5.1",

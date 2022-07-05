@@ -70,6 +70,9 @@ Once ```hinge``` is installed, you can run this command in the root of your git 
 ``` bash
 hinge .
 ```
+
+**NOTE**: The provided path needs to be a git repository.
+
 ### Flag Notes
 
 | Flag | Notes |
@@ -77,8 +80,6 @@ hinge .
 |-d, --day | Must be a valid day of the week. (monday, tuesday, wednesday, thursday, friday, saturday, sunday). Defaults to monday if using a weekly interval.|
 |-i, --interval | Must be one of the following: daily, weekly, monthly. Defaults to daily.|
 |-z, --timezone | Must be a timezone listed at https://en.wikipedia.org/wiki/List_of_tz_database_time_zones. Defaults to "US/Pacific if not explicitly defined.|
-
-
 
 ## Development
 

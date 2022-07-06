@@ -39,7 +39,10 @@ var (
 				log.SetOutput(ioutil.Discard)
 			}
 			util.DoIf(Verbose, func() {
-				color.Style{color.White, color.OpBold}.Println("hinge")
+				fmt.Println()
+				color.Style{color.FgWhite, color.OpBold}.Println("█▄█ █ █▄ █ ▄▀  ██▀")
+				color.Style{color.FgWhite, color.OpBold}.Println("█ █ █ █ ▀█ ▀▄█ █▄▄")
+				fmt.Println()
 				fmt.Println("DKFM - DevOps Kung Fu Mafia")
 				fmt.Println("https://github.com/devops-kung-fu/hinge")
 				fmt.Printf("Version: %s\n", version)

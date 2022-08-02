@@ -22,7 +22,7 @@ Creates and updates your Dependabot configuration file, `dependabot.yml`.
 
 ### Mac
 
-You can use [Homebrew](https://brew.sh) to install ```Hookz``` using the following:
+You can use [Homebrew](https://brew.sh) to install ```hinge``` using the following:
 
 ``` bash
 brew tap devops-kung-fu/homebrew-tap

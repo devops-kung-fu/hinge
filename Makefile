@@ -13,15 +13,16 @@ title:
 	@echo "--------------"
 
 build: ## Builds the application
-	go get -u ./...
-	go mod tidy
-	go build ./...
+	@echo Building...
+	@go get -u ./...
+	@go mod tidy
+	@go build ./...
 
 test: ## Runs tests and coverage
-	go test -v -coverprofile=coverage.out ./... && go tool cover -func=coverage.out
+	@go test -v -coverprofile=coverage.out ./... && go tool cover -func=coverage.out
 
 check: build ## Tests the pre-commit hooks if they exist
-	hookz reset --verbose --debug --verbose-output 
+	@hookz reset --verbose --debug --verbose-output 
 	. .git/hooks/pre-commit
 
 all: title build test ## Makes all targets

@@ -19,7 +19,7 @@ import (
 )
 
 var (
-	version = "1.0.0"
+	version = "1.0.1"
 	//Afs stores a global OS Filesystem that is used throughout hinge
 	Afs = &afero.Afero{Fs: afero.NewOsFs()}
 	//Verbose determines if the execution of hing should output verbose information

@@ -1,6 +1,6 @@
-  version: 2.4.0
+  version: 2.4.1
   sources:
-    - source: github.com/CycloneDX/cyclonedx-gomod/cmd/cyclonedx-gomod@latest
+    - source: github.com/anchore/syft/cmd/syft@latest
     - source: github.com/devops-kung-fu/hinge@latest
     - source: github.com/kisielk/errcheck@latest      
     - source: golang.org/x/lint/golint@latest
@@ -30,7 +30,7 @@
           exec: gocyclo
           args: ["-over", "8", "."]
         - name: Hinge
-          exec: hinge
+          exec: ./hinge
           args: ["."]
         - name: "go: Build (Ensure pulled modules do not break the build)"
           exec: go
@@ -41,9 +41,14 @@
         - name: "go: Test coverage"
           exec: go
           args: ["tool", "cover", "-func=coverage.out"]
-        - name: "cyclone-dx: Generate a Software Bill of Materials (SBoM)"
-          exec: cyclonedx-gomod
-          args: ["-json", "-output", "hinge-sbom.json"]
+        - name: "syft: Generate a Software Bill of Materials (SBoM)"
+          exec: syft
+          args: [".","-o ","json=sbom/hinge.syft.json","-o", "spdx-json=sbom/hinge.spdx.json", "-o", "cyclonedx-json=sbom/hinge.cyclonedx.json"]
         - name: "git: Add all changed files during the pre-commit stage"
           exec: git
           args: ["add", "."]
+    - type: pre-push
+      actions:
+        - name: "hookz: example pre-push hook"
+          exec: /bin/echo
+          args: ["Pushing changes..."]

@@ -20,14 +20,23 @@ Creates and updates your Dependabot configuration file, `dependabot.yml`.
 
 ## Installation
 
-To install ```hinge```, [download the latest release](https://github.com/devops-kung-fu/hinge/releases) , make it executable, rename it to `hinge` and move it to the `/usr/local/bin` directory for Linux, or on your `PATH` for other operating systems.
+### Mac
 
-### Linux Example
+You can use [Homebrew](https://brew.sh) to install ```Hookz``` using the following:
 
-```bash
-sudo chmod +x hinge-1.0.0-linux-amd64
-sudo mv hinge-1.0.0-linux-amd64 /usr/local/bin/hinge
+``` bash
+brew tap devops-kung-fu/homebrew-tap
+brew install devops-kung-fu/homebrew-tap/hinge
 ```
+
+### Linux
+
+To install ```hinge```, download the latest release [deb or rpm](https://github.com/devops-kung-fu/hinge/releases and install.
+
+``` bash
+# Debian Example
+dpkg -i hinge_1.0.1_linux_amd64.deb
+
 ### With a Go Development Environment
 
 If you have a Go development environment set up, you can also simply do this:
@@ -71,7 +80,7 @@ Once ```hinge``` is installed, you can run this command in the root of your git 
 hinge .
 ```
 
-**NOTE**: The provided path needs to be a git repository.
+**NOTE**: The provided path must be a git repository.
 
 ### Flag Notes
 

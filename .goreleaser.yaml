@@ -24,18 +24,17 @@ brews:
       owner: devops-kung-fu
       name: homebrew-tap
     commit_author:
-      name: djschleen
-      email: djschleen@gmail.com
+      name: pacoguzman
+      email: pacoguzmanp@gmail.com
 
 checksum:
   name_template: 'checksums.txt'
 
 nfpms:
-  - maintainer: DJ Schleen <djschleen@gmail.com>
+  - maintainer: Paco Guzman <pacoguzmanp@gmail.com>
     description: Creates and updates your Dependabot config.
     homepage: https://github.com/pacoguzman/hinge
     license: MPL
     formats:
       - deb
       - rpm
-

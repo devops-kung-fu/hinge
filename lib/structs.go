@@ -10,6 +10,7 @@ type Configuration struct {
 type Update struct {
 	PackageEcosystem string `yaml:"package-ecosystem"`
 	Directory        string `yaml:"directory"`
+	RebaseStrategy   string `yaml:"rebase-strategy,omitempty"`
 	Schedule         `yaml:"schedule"`
 }
 

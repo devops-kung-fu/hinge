@@ -12,30 +12,30 @@ import (
 )
 
 // Generate generates the dependabot.yml in the specified repo path.
-func Generate(afs *afero.Afero, repoPath string, schedule Schedule) (config Configuration, err error) {
+func Generate(afs *afero.Afero, repoPath string, rebaseStrategy string, schedule Schedule) (config Configuration, err error) {
 	log.Println("Starting file generation")
 
-	bundler := platform(afs, `Gemfile|Gemfile\.lock`, repoPath, "bundler", schedule)
-	cargo := platform(afs, `Cargo\.toml`, repoPath, "cargo", schedule)
-	composer := platform(afs, `composer\.json`, repoPath, "composer", schedule)
-	docker := platform(afs, `Dockerfile(.*)|docker\-compose\.yml`, repoPath, "docker", schedule)
-	elm := platform(afs, `elm\-package\.json`, repoPath, "elm", schedule)
-	gitsubmodules := platform(afs, `\.gitmodules`, repoPath, "gitsubmodule", schedule)
-	github := platform(afs, `(.*)\.(yaml|yml)`, repoPath, "github-actions", schedule)
+	bundler := platform(afs, `Gemfile|Gemfile\.lock`, repoPath, "bundler", rebaseStrategy, schedule)
+	cargo := platform(afs, `Cargo\.toml`, repoPath, "cargo", rebaseStrategy, schedule)
+	composer := platform(afs, `composer\.json`, repoPath, "composer", rebaseStrategy, schedule)
+	docker := platform(afs, `Dockerfile(.*)|docker\-compose\.yml`, repoPath, "docker", rebaseStrategy, schedule)
+	elm := platform(afs, `elm\-package\.json`, repoPath, "elm", rebaseStrategy, schedule)
+	gitsubmodules := platform(afs, `\.gitmodules`, repoPath, "gitsubmodule", rebaseStrategy, schedule)
+	github := platform(afs, `(.*)\.(yaml|yml)`, repoPath, "github-actions", rebaseStrategy, schedule)
 	var githubActual []Update
 	for _, githubPath := range github {
 		if strings.Contains(githubPath.Directory, ".github/workflows") {
 			githubActual = append(githubActual, githubPath)
 		}
 	}
-	gomod := platform(afs, `go\.mod`, repoPath, "gomod", schedule)
-	gradle := platform(afs, `build\.gradle|build\.gradle\.kts`, repoPath, "gradle", schedule)
-	hexmix := platform(afs, `mix\.exs|mix\.lock`, repoPath, "mix", schedule)
-	maven := platform(afs, `pom\.xml`, repoPath, "maven", schedule)
-	npm := platform(afs, `package\.json|package\-lock\.json`, repoPath, "npm", schedule)
-	nuget := platform(afs, `\.nuspec|(Nuget|nuget).config`, repoPath, "nuget", schedule)
-	pip := platform(afs, `requirements\.txt|requirement\.txt|Pipfile|Pipfile\.lock|setup\.py|requirements\.in|pyproject\.toml`, repoPath, "pip", schedule)
-	terraform := platform(afs, `(.*)\.tf`, repoPath, "terraform", schedule)
+	gomod := platform(afs, `go\.mod`, repoPath, "gomod", rebaseStrategy, schedule)
+	gradle := platform(afs, `build\.gradle|build\.gradle\.kts`, repoPath, "gradle", rebaseStrategy, schedule)
+	hexmix := platform(afs, `mix\.exs|mix\.lock`, repoPath, "mix", rebaseStrategy, schedule)
+	maven := platform(afs, `pom\.xml`, repoPath, "maven", rebaseStrategy, schedule)
+	npm := platform(afs, `package\.json|package\-lock\.json`, repoPath, "npm", rebaseStrategy, schedule)
+	nuget := platform(afs, `\.nuspec|(Nuget|nuget).config`, repoPath, "nuget", rebaseStrategy, schedule)
+	pip := platform(afs, `requirements\.txt|requirement\.txt|Pipfile|Pipfile\.lock|setup\.py|requirements\.in|pyproject\.toml`, repoPath, "pip", rebaseStrategy, schedule)
+	terraform := platform(afs, `(.*)\.tf`, repoPath, "terraform", rebaseStrategy, schedule)
 
 	log.Println("Got platform ecosystems")
 
@@ -54,9 +54,9 @@ func Generate(afs *afero.Afero, repoPath string, schedule Schedule) (config Conf
 	return
 }
 
-func platform(afs *afero.Afero, regex string, repoPath string, ecosystem string, schedule Schedule) (updates []Update) {
+func platform(afs *afero.Afero, regex string, repoPath string, ecosystem string, rebaseStrategy string, schedule Schedule) (updates []Update) {
 	uniqueDirs := removeDuplicates(directoryParser(afs, regex, repoPath))
-	updates = updatesBuilder(uniqueDirs, ecosystem, schedule)
+	updates = updatesBuilder(uniqueDirs, ecosystem, rebaseStrategy, schedule)
 	return
 }
 
@@ -104,11 +104,12 @@ func removeDuplicates(stringSlice []string) (list []string) {
 	return
 }
 
-func updatesBuilder(directories []string, ecosystem string, schedule Schedule) (updates []Update) {
+func updatesBuilder(directories []string, ecosystem string, rebaseStrategy string, schedule Schedule) (updates []Update) {
 	for _, dir := range directories {
 		update := Update{
 			PackageEcosystem: ecosystem,
 			Directory:        dir,
+			RebaseStrategy:   rebaseStrategy,
 			Schedule:         schedule,
 		}
 		updates = append(updates, update)

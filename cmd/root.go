@@ -23,13 +23,14 @@ var (
 	//Afs stores a global OS Filesystem that is used throughout hinge
 	Afs = &afero.Afero{Fs: afero.NewOsFs()}
 	//Verbose determines if the execution of hing should output verbose information
-	Verbose  bool
-	debug    bool
-	interval string
-	day      string
-	time     string
-	timeZone string
-	rootCmd  = &cobra.Command{
+	Verbose        bool
+	debug          bool
+	interval       string
+	day            string
+	time           string
+	timeZone       string
+	rebaseStrategy string
+	rootCmd        = &cobra.Command{
 		Use:     "hinge [flags] path/to/repo",
 		Example: "  hinge path/to/repo",
 		Short:   "Creates or updates your Dependabot config.",
@@ -71,7 +72,7 @@ var (
 			}
 		},
 		Run: func(cmd *cobra.Command, args []string) {
-			config, err := lib.Generate(Afs, args[0], buildSchedule())
+			config, err := lib.Generate(Afs, args[0], buildRebaseStrategy(), buildSchedule())
 			if err != nil {
 				log.Panic(err)
 			}
@@ -102,6 +103,20 @@ func init() {
 	rootCmd.PersistentFlags().StringVarP(&day, "day", "d", "monday", "Specify a day to check for updates when using a weekly interval.")
 	rootCmd.PersistentFlags().StringVarP(&time, "time", "t", "05:00", "Specify a time of day to check for updates using 24 hour format (format: hh:mm).")
 	rootCmd.PersistentFlags().StringVarP(&timeZone, "timezone", "z", "US/Pacific", "Specify a time zone. Valid timezones are available at https://en.wikipedia.org/wiki/List_of_tz_database_time_zones.")
+	rootCmd.PersistentFlags().StringVarP(&rebaseStrategy, "rebase-strategy", "rs", "disable", "Dependabot automatically rebases open pull requests when it detects any changes to the pull request")
+}
+
+func buildRebaseStrategy() (rebaseStrategy string) {
+	switch {
+	case rebaseStrategy == "auto":
+		return ""
+	case rebaseStrategy == "":
+		return ""
+	case rebaseStrategy == "disable":
+		return "disable"
+	}
+
+	return ""
 }
 
 func buildSchedule() (schedule lib.Schedule) {

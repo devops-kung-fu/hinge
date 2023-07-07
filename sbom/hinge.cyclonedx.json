@@ -149,17 +149,17 @@
         },
         {
           "name": "syft:metadata:mainModule",
-          "value": "github.com/devops-kung-fu/hinge"
+          "value": "github.com/pacoguzman/hinge"
         }
       ]
     },
     {
-      "bom-ref": "pkg:golang/github.com/devops-kung-fu/hinge@v0.0.0-20220802163800-cebd79d79dde?package-id=3fbfc866af6d66ce",
+      "bom-ref": "pkg:golang/github.com/pacoguzman/hinge@v0.0.0-20220802163800-cebd79d79dde?package-id=3fbfc866af6d66ce",
       "type": "library",
-      "name": "github.com/devops-kung-fu/hinge",
+      "name": "github.com/pacoguzman/hinge",
       "version": "v0.0.0-20220802163800-cebd79d79dde",
       "cpe": "cpe:2.3:a:devops-kung-fu:hinge:v0.0.0-20220802163800-cebd79d79dde:*:*:*:*:*:*:*",
-      "purl": "pkg:golang/github.com/devops-kung-fu/hinge@v0.0.0-20220802163800-cebd79d79dde",
+      "purl": "pkg:golang/github.com/pacoguzman/hinge@v0.0.0-20220802163800-cebd79d79dde",
       "properties": [
         {
           "name": "syft:package:foundBy",
@@ -207,7 +207,7 @@
         },
         {
           "name": "syft:metadata:mainModule",
-          "value": "github.com/devops-kung-fu/hinge"
+          "value": "github.com/pacoguzman/hinge"
         }
       ]
     },
@@ -279,7 +279,7 @@
         },
         {
           "name": "syft:metadata:mainModule",
-          "value": "github.com/devops-kung-fu/hinge"
+          "value": "github.com/pacoguzman/hinge"
         }
       ]
     },
@@ -407,7 +407,7 @@
         },
         {
           "name": "syft:metadata:mainModule",
-          "value": "github.com/devops-kung-fu/hinge"
+          "value": "github.com/pacoguzman/hinge"
         }
       ]
     },
@@ -479,7 +479,7 @@
         },
         {
           "name": "syft:metadata:mainModule",
-          "value": "github.com/devops-kung-fu/hinge"
+          "value": "github.com/pacoguzman/hinge"
         }
       ]
     },
@@ -551,7 +551,7 @@
         },
         {
           "name": "syft:metadata:mainModule",
-          "value": "github.com/devops-kung-fu/hinge"
+          "value": "github.com/pacoguzman/hinge"
         }
       ]
     },
@@ -649,7 +649,7 @@
         },
         {
           "name": "syft:metadata:mainModule",
-          "value": "github.com/devops-kung-fu/hinge"
+          "value": "github.com/pacoguzman/hinge"
         }
       ]
     },
@@ -747,7 +747,7 @@
         },
         {
           "name": "syft:metadata:mainModule",
-          "value": "github.com/devops-kung-fu/hinge"
+          "value": "github.com/pacoguzman/hinge"
         }
       ]
     },
@@ -817,7 +817,7 @@
         },
         {
           "name": "syft:metadata:mainModule",
-          "value": "github.com/devops-kung-fu/hinge"
+          "value": "github.com/pacoguzman/hinge"
         }
       ]
     },

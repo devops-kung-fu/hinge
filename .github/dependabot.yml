@@ -5,10 +5,10 @@ updates:
   schedule:
     interval: daily
     time: "05:00"
-    timezone: US/Pacific
+    timezone: Europe/Madrid
 - package-ecosystem: gomod
   directory: /
   schedule:
     interval: daily
     time: "05:00"
-    timezone: US/Pacific
+    timezone: Europe/Madrid

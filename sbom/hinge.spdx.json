@@ -126,7 +126,7 @@
   },
   {
    "SPDXID": "SPDXRef-3fbfc866af6d66ce",
-   "name": "github.com/devops-kung-fu/hinge",
+   "name": "github.com/pacoguzman/hinge",
    "licenseConcluded": "NONE",
    "downloadLocation": "NOASSERTION",
    "externalRefs": [
@@ -157,7 +157,7 @@
     },
     {
      "referenceCategory": "PACKAGE_MANAGER",
-     "referenceLocator": "pkg:golang/github.com/devops-kung-fu/hinge@v0.0.0-20220802163800-cebd79d79dde",
+     "referenceLocator": "pkg:golang/github.com/pacoguzman/hinge@v0.0.0-20220802163800-cebd79d79dde",
      "referenceType": "purl"
     }
    ],

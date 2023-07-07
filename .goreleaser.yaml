@@ -1,7 +1,7 @@
 project_name: hinge
 
 builds:
-  - 
+  -
     binary: hinge
     goos:
       - darwin
@@ -19,7 +19,7 @@ universal_binaries:
 brews:
   -
     name: hinge
-    homepage: "https://github.com/devops-kung-fu/hinge"
+    homepage: "https://github.com/pacoguzman/hinge"
     tap:
       owner: devops-kung-fu
       name: homebrew-tap
@@ -33,7 +33,7 @@ checksum:
 nfpms:
   - maintainer: DJ Schleen <djschleen@gmail.com>
     description: Creates and updates your Dependabot config.
-    homepage: https://github.com/devops-kung-fu/hinge
+    homepage: https://github.com/pacoguzman/hinge
     license: MPL
     formats:
       - deb

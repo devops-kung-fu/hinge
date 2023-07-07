@@ -13,12 +13,13 @@ func TestGenerate(t *testing.T) {
 	afs.Create("go.mod")
 	afs.Create("requirements.txt")
 
+	rebaseStrategy := ""
 	schedule := Schedule{
 		Interval: "daily",
 		Time:     "",
 		TimeZone: "",
 	}
-	config, err := Generate(afs, ".", schedule)
+	config, err := Generate(afs, ".", rebaseStrategy, schedule)
 	assert.NoError(t, err)
 	assert.Equal(t, 2, config.Version)
 	assert.Len(t, config.Updates, 2)

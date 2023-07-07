@@ -20,8 +20,8 @@ brews:
   -
     name: hinge
     homepage: "https://github.com/pacoguzman/hinge"
-    tap:
-      owner: devops-kung-fu
+    repository:
+      owner: pacoguzman
       name: homebrew-tap
     commit_author:
       name: pacoguzman

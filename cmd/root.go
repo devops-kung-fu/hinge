@@ -15,7 +15,7 @@ import (
 	"github.com/spf13/afero"
 	"github.com/spf13/cobra"
 
-	"github.com/devops-kung-fu/hinge/lib"
+	"github.com/pacoguzman/hinge/lib"
 )
 
 var (
@@ -44,7 +44,7 @@ var (
 				color.Style{color.FgWhite, color.OpBold}.Println("█ █ █ █ ▀█ ▀▄█ █▄▄")
 				fmt.Println()
 				fmt.Println("DKFM - DevOps Kung Fu Mafia")
-				fmt.Println("https://github.com/devops-kung-fu/hinge")
+				fmt.Println("https://github.com/pacoguzman/hinge")
 				fmt.Printf("Version: %s\n", version)
 				fmt.Println()
 			})

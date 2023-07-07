@@ -2,9 +2,9 @@
 
 # Hinge
 
-![GitHub release (latest by date)](https://img.shields.io/github/v/release/devops-kung-fu/hinge) 
-[![Go Report Card](https://goreportcard.com/badge/github.com/devops-kung-fu/hinge)](https://goreportcard.com/report/github.com/devops-kung-fu/hinge) 
-[![codecov](https://codecov.io/gh/devops-kung-fu/hinge/branch/main/graph/badge.svg?token=BIROb1Npbk)](https://codecov.io/gh/devops-kung-fu/hinge) 
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/devops-kung-fu/hinge)
+[![Go Report Card](https://goreportcard.com/badge/github.com/pacoguzman/hinge)](https://goreportcard.com/report/github.com/pacoguzman/hinge)
+[![codecov](https://codecov.io/gh/devops-kung-fu/hinge/branch/main/graph/badge.svg?token=BIROb1Npbk)](https://codecov.io/gh/devops-kung-fu/hinge)
 [![SBOM](https://img.shields.io/badge/CyloneDX-SBoM-informational)](hinge-sbom.json)
 
 
@@ -31,7 +31,7 @@ brew install devops-kung-fu/homebrew-tap/hinge
 
 ### Linux
 
-To install ```hinge```, download the latest release [deb or rpm](https://github.com/devops-kung-fu/hinge/releases and install.
+To install ```hinge```, download the latest release [deb or rpm](https://github.com/pacoguzman/hinge/releases and install.
 
 ``` bash
 # Debian Example
@@ -42,7 +42,7 @@ dpkg -i hinge_1.0.1_linux_amd64.deb
 If you have a Go development environment set up, you can also simply do this:
 
 ``` bash
-go install github.com/devops-kung-fu/hinge@latest
+go install github.com/pacoguzman/hinge@latest
 ```
 
 ## Usage
@@ -50,7 +50,7 @@ go install github.com/devops-kung-fu/hinge@latest
 ```
 Hinge
 DKFM - DevOps Kung Fu Mafia
-https://github.com/devops-kung-fu/hinge
+https://github.com/pacoguzman/hinge
 Version: 1.0.0
 
 Creates or updates your Dependabot config.
@@ -117,4 +117,4 @@ The current SBoM for ```hinge``` is available [here](hinge-sbom.json).
 
 ## Credits
 
-A big thank-you to our friends at [Freepik](https://www.freepik.com) for the ```hinge``` logo. 
+A big thank-you to our friends at [Freepik](https://www.freepik.com) for the ```hinge``` logo.

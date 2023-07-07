@@ -33,7 +33,7 @@ func Generate(afs *afero.Afero, repoPath string, schedule Schedule) (config Conf
 	hexmix := platform(afs, `mix\.exs|mix\.lock`, repoPath, "mix", schedule)
 	maven := platform(afs, `pom\.xml`, repoPath, "maven", schedule)
 	npm := platform(afs, `package\.json|package\-lock\.json`, repoPath, "npm", schedule)
-	nuget := platform(afs, `\.nuspec`, repoPath, "nuget", schedule)
+	nuget := platform(afs, `\.nuspec|(Nuget|nuget).config`, repoPath, "nuget", schedule)
 	pip := platform(afs, `requirements\.txt|requirement\.txt|Pipfile|Pipfile\.lock|setup\.py|requirements\.in|pyproject\.toml`, repoPath, "pip", schedule)
 	terraform := platform(afs, `(.*)\.tf`, repoPath, "terraform", schedule)
 

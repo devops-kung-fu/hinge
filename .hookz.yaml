@@ -1,8 +1,8 @@
   version: 2.4.1
   sources:
     - source: github.com/anchore/syft/cmd/syft@latest
-    - source: github.com/devops-kung-fu/hinge@latest
-    - source: github.com/kisielk/errcheck@latest      
+    - source: github.com/pacoguzman/hinge@latest
+    - source: github.com/kisielk/errcheck@latest
     - source: golang.org/x/lint/golint@latest
     - source: github.com/fzipp/gocyclo/cmd/gocyclo@latest
   hooks:
@@ -10,7 +10,7 @@
       actions:
         - name: "git: Pull (Ensure there are no upstream changes that are not local)"
           exec: git
-          args: ["pull"]  
+          args: ["pull"]
         - name: "go: Tidy mod file"
           exec: go
           args: ["mod", "tidy"]

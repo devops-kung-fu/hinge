@@ -3,7 +3,7 @@ package main
 import (
 	"os"
 
-	"github.com/devops-kung-fu/hinge/cmd"
+	"github.com/pacoguzman/hinge/cmd"
 )
 
 func main() {

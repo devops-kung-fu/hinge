@@ -103,7 +103,7 @@ func init() {
 	rootCmd.PersistentFlags().StringVarP(&day, "day", "d", "monday", "Specify a day to check for updates when using a weekly interval.")
 	rootCmd.PersistentFlags().StringVarP(&time, "time", "t", "05:00", "Specify a time of day to check for updates using 24 hour format (format: hh:mm).")
 	rootCmd.PersistentFlags().StringVarP(&timeZone, "timezone", "z", "US/Pacific", "Specify a time zone. Valid timezones are available at https://en.wikipedia.org/wiki/List_of_tz_database_time_zones.")
-	rootCmd.PersistentFlags().StringVarP(&rebaseStrategy, "rebase-strategy", "rs", "disable", "Dependabot automatically rebases open pull requests when it detects any changes to the pull request")
+	rootCmd.PersistentFlags().StringVarP(&rebaseStrategy, "rebase-strategy", "s", "disable", "Dependabot automatically rebases open pull requests when it detects any changes to the pull request")
 }
 
 func buildRebaseStrategy() (rebaseStrategy string) {
